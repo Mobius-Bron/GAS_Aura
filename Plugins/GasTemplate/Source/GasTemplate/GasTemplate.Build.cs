@@ -27,12 +27,15 @@ public class GasTemplate : ModuleRules
 			{
 				"Core",
                 "CoreUObject",
+				"Slate",
+				"SlateCore",
                 "Engine",
                 "EnhancedInput",
                 "GameplayTags",
                 "GameplayTasks",
                 "GameplayAbilities",
                 "ModularGameplay",
+				"AIModule",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -41,8 +44,6 @@ public class GasTemplate : ModuleRules
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Slate",
-				"SlateCore",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
