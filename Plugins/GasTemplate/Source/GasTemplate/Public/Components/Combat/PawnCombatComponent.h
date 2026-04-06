@@ -7,7 +7,9 @@
 #include "GameplayTagContainer.h"
 
 #include "DataTypes/VirgoEnumTypes.h"
+#include "Items/Weapons/WeaponBase.h"
 #include "Items/Weapons/VirgoHeroWeapon.h"
+#include "Items/Weapons/VirgoEnemyWeapon.h"
 #include "PawnCombatComponent.generated.h"
 
 /**
@@ -20,7 +22,13 @@ class GASTEMPLATE_API UPawnCombatComponent : public UPawnExtensionComponentBase
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Virgo|Combat")
-	void RegisterSpawnedWeapon(FGameplayTag WeaponTag, AWeaponBase* SpwanWeapon, bool RegisterAsEquippedWeapon = false);
+	void RegisterWeapon(FGameplayTag WeaponTag, AWeaponBase* SpwanWeapon, bool RegisterAsEquippedWeapon = false);
+
+	UFUNCTION(BlueprintCallable, Category = "Virgo|Combat")
+	void UnregisterWeapon(FGameplayTag WeaponTag);
+
+	UFUNCTION(BlueprintCallable, Category = "Virgo|Combat")
+	void SpawnAndRegisterWeapon(FGameplayTag WeaponTag, TSubclassOf<AWeaponBase> WeaponClass, FName SpawnAttachName, bool RegisterAsEquippedWeapon = true);
 
 	UFUNCTION(BlueprintCallable, Category = "Virgo|Combat")
 	void UnregisterAndDestoryWeapon(FGameplayTag WeaponTag);
