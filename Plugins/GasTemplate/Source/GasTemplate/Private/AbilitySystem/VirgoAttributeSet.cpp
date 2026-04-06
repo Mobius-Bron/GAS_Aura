@@ -2,6 +2,7 @@
 
 
 #include "AbilitySystem/VirgoAttributeSet.h"
+#include "Net/UnrealNetwork.h"
 #include "GameplayEffectExtension.h"
 #include "AbilitySystemBlueprintLibrary.h"
 
@@ -14,6 +15,16 @@ UVirgoAttributeSet::UVirgoAttributeSet()
 	InitCurrentHealth(1.0f);
 	InitAttackPower(1.0f);
 	InitDefensePower(1.0f);
+}
+
+void UVirgoAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME_CONDITION_NOTIFY(UVirgoAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UVirgoAttributeSet, CurrentHealth, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UVirgoAttributeSet, AttackPower, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UVirgoAttributeSet, DefensePower, COND_None, REPNOTIFY_Always);
 }
 
 void UVirgoAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
@@ -47,4 +58,24 @@ void UVirgoAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		}
 		// ÑªÁ¿±ä»¯
 	}
+}
+
+void UVirgoAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& OldValue)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UVirgoAttributeSet, MaxHealth, OldValue);
+}
+
+void UVirgoAttributeSet::OnRep_CurrentHealth(const FGameplayAttributeData& OldValue)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UVirgoAttributeSet, CurrentHealth, OldValue);
+}
+
+void UVirgoAttributeSet::OnRep_AttackPower(const FGameplayAttributeData& OldValue)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UVirgoAttributeSet, AttackPower, OldValue);
+}
+
+void UVirgoAttributeSet::OnRep_DefensePower(const FGameplayAttributeData& OldValue)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UVirgoAttributeSet, DefensePower, OldValue);
 }

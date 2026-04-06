@@ -24,25 +24,41 @@ class GASTEMPLATE_API UVirgoAttributeSet : public UAttributeSet
 public:
 	UVirgoAttributeSet();
 
-	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Attribute|Health")
+	UPROPERTY(BlueprintReadOnly, Category = "Attribute|Health", ReplicatedUsing = OnRep_MaxHealth)
 	FGameplayAttributeData MaxHealth;
 	ATTRIBUTE_ACCESSORS(UVirgoAttributeSet, MaxHealth);
 
-	UPROPERTY(BlueprintReadOnly, Category = "Attribute|Health")
+	UPROPERTY(BlueprintReadOnly, Category = "Attribute|Health", ReplicatedUsing = OnRep_CurrentHealth)
 	FGameplayAttributeData CurrentHealth;
 	ATTRIBUTE_ACCESSORS(UVirgoAttributeSet, CurrentHealth);
 
-	UPROPERTY(BlueprintReadOnly, Category = "Attribute|Attack")
+	UPROPERTY(BlueprintReadOnly, Category = "Attribute|Attack", ReplicatedUsing = OnRep_AttackPower)
 	FGameplayAttributeData AttackPower;
 	ATTRIBUTE_ACCESSORS(UVirgoAttributeSet, AttackPower);
 
-	UPROPERTY(BlueprintReadOnly, Category = "Attribute|Defense")
+	UPROPERTY(BlueprintReadOnly, Category = "Attribute|Defense", ReplicatedUsing = OnRep_DefensePower)
 	FGameplayAttributeData DefensePower;
 	ATTRIBUTE_ACCESSORS(UVirgoAttributeSet, DefensePower);
 	
+	// Meta Attribute (´«µÝÖµ)
 	UPROPERTY(BlueprintReadOnly, Category = "Attribute|Damage")
 	FGameplayAttributeData DamageTaken;
 	ATTRIBUTE_ACCESSORS(UVirgoAttributeSet, DamageTaken);
+
+	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
+
+	// Replicate
+	UFUNCTION()
+	void OnRep_MaxHealth(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	void OnRep_CurrentHealth(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	void OnRep_AttackPower(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	void OnRep_DefensePower(const FGameplayAttributeData& OldValue);
 };

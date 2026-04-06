@@ -5,7 +5,8 @@
 
 UVirgoAbilitySystemComponent::UVirgoAbilitySystemComponent()
 {
-
+	SetIsReplicated(true);
+	SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
 }
 
 void UVirgoAbilitySystemComponent::GrantHeroAbilities(const TArray<FVirgoHeroAbilitySet>& AbilitySet, int32 ApplyLevel, TArray<FGameplayAbilitySpecHandle>& OutGrantedAbilitySpecHandle)

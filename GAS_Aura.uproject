@@ -17,6 +17,22 @@
 			"TargetAllowList": [
 				"Editor"
 			]
+		},
+		{
+			"Name": "AudioManager",
+			"Enabled": true
+		},
+		{
+			"Name": "GasTemplate",
+			"Enabled": true
+		},
+		{
+			"Name": "MultiplayerSessionManager",
+			"Enabled": true
+		},
+		{
+			"Name": "SettingMenu",
+			"Enabled": true
 		}
 	]
 }

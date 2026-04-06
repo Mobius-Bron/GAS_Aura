@@ -3,4 +3,7 @@
 
 #include "Components/PawnExtensionComponentBase.h"
 
-
+UPawnExtensionComponentBase::UPawnExtensionComponentBase()
+{
+	SetIsReplicated(true);
+}

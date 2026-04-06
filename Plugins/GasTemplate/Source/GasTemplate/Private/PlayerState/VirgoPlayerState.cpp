@@ -8,6 +8,9 @@
 
 AVirgoPlayerState::AVirgoPlayerState()
 {
+	SetReplicates(true);
+	SetMinNetUpdateFrequency(120.f);
+
 	VirgoAbilitySystemComponent = CreateDefaultSubobject<UVirgoAbilitySystemComponent>(TEXT("VirgoAbilitySystemComponent"));
 
 	VirgoAttributeSet = CreateDefaultSubobject<UVirgoAttributeSet>(TEXT("VirgoAttributeSet"));

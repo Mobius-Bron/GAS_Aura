@@ -36,6 +36,7 @@ public:
 	/* IPawnCombatInterface */
 
 	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
 
 protected:
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
@@ -69,5 +70,8 @@ protected:
 
 public:
 	FORCEINLINE UHeroCombatComponent* GetHeroCombatComponent() const { return HeroCombatComponent; }
+
+private:
+	void SetUpAbilitySystem();
 
 };

@@ -8,6 +8,9 @@
 
 AVirgoCharacterBase::AVirgoCharacterBase()
 {
+	SetReplicates(true);
+	SetMinNetUpdateFrequency(90.f);
+
 	PrimaryActorTick.bCanEverTick = false;
 	PrimaryActorTick.bStartWithTickEnabled = false;
 

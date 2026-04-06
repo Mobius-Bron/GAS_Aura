@@ -7,8 +7,11 @@
 #include "AbilitySystemInterface.h"
 #include "VirgoEnemyCharacter.generated.h"
 
+class UBehaviorTreeComponent;
+
 class UEnemyCombatComponent;
 class UDataAsset_EnemyStartUpData;
+class AVirgoAIController;
 
 /**
  * 
@@ -31,12 +34,20 @@ public:
 
 	void BeginPlay() override;
 
+	void PossessedBy(AController* NewController) override;
+
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Virgo|Combat")
 	UEnemyCombatComponent* EnemyCombatComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "CharacterData", meta = (AllowPrivateAccess = "true"))
 	TSoftObjectPtr<UDataAsset_EnemyStartUpData> EnemyStartUpConfig;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AI")
+	TObjectPtr<UBehaviorTreeComponent> BehaviorTreeComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AI")
+	TObjectPtr<AVirgoAIController> VirgoAIController;
 
 private:
 	void InitEnemyStartUpData();

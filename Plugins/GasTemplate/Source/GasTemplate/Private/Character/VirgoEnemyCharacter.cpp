@@ -4,12 +4,14 @@
 #include "Character/VirgoEnemyCharacter.h"
 #include "Engine/AssetManager.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "BehaviorTree/BehaviorTreeComponent.h"
 
 #include "AbilitySystem/VirgoAbilitySystemComponent.h"
 #include "AbilitySystem/VirgoAttributeSet.h"
 #include "Components/Combat/EnemyCombatComponent.h"
 #include "DataAssets/StartUp/DataAsset_StartUpDataBase.h"
 #include "DataAssets/StartUp/DataAsset_EnemyStartUpData.h"
+#include "AI/VirgoAIController.h"
 
 AVirgoEnemyCharacter::AVirgoEnemyCharacter()
 {
@@ -27,6 +29,11 @@ AVirgoEnemyCharacter::AVirgoEnemyCharacter()
 	VirgoAttributeSet = CreateDefaultSubobject<UVirgoAttributeSet>(TEXT("VirgoAttributeSet"));
 
 	EnemyCombatComponent = CreateDefaultSubobject<UEnemyCombatComponent>(TEXT("EnemyCombatComponent"));
+
+	// AI
+	BehaviorTreeComponent = CreateDefaultSubobject<UBehaviorTreeComponent>("BehaviorTreeComponent");
+
+	VirgoAIController = CreateDefaultSubobject<AVirgoAIController>("VirgoAIController");
 }
 
 UAbilitySystemComponent* AVirgoEnemyCharacter::GetAbilitySystemComponent() const
@@ -45,6 +52,13 @@ void AVirgoEnemyCharacter::BeginPlay()
 
 	VirgoAbilitySystemComponent->InitAbilityActorInfo(this, this);
 	InitEnemyStartUpData();
+}
+
+void AVirgoEnemyCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	VirgoAIController = Cast<AVirgoAIController>(NewController);
 }
 
 void AVirgoEnemyCharacter::InitEnemyStartUpData()

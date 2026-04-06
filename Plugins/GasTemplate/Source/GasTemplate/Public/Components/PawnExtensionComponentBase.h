@@ -12,6 +12,9 @@ class GASTEMPLATE_API UPawnExtensionComponentBase : public UActorComponent
 {
 	GENERATED_BODY()
 
+public:
+	UPawnExtensionComponentBase();
+
 protected:
 	template<class T>
 	T* GetOwningPawn() const

@@ -5,4 +5,6 @@
 
 AVirgoController::AVirgoController()
 {
+	SetReplicates(true);
+	SetMinNetUpdateFrequency(120.f);
 }

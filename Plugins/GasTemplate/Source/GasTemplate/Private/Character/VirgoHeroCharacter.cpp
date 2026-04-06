@@ -54,23 +54,14 @@ void AVirgoHeroCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
-	AVirgoPlayerState* VirgoPlayerState = GetPlayerState<AVirgoPlayerState>();
+	SetUpAbilitySystem();
+}
 
-	check(VirgoPlayerState);
+void AVirgoHeroCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
 
-	VirgoAbilitySystemComponent = VirgoPlayerState->GetVirgoAbilitySystemComponent();
-
-	VirgoAttributeSet = VirgoPlayerState->GetVirgoAttributeSet();
-
-	VirgoAbilitySystemComponent->InitAbilityActorInfo(VirgoPlayerState, this);
-
-	if (!HeroStartUpConfig.IsNull())
-	{
-		if (UDataAsset_HeroStartUpData* LoadData = HeroStartUpConfig.LoadSynchronous())
-		{
-			LoadData->GiveToAbilitySystemComponent(VirgoAbilitySystemComponent);
-		}
-	}
+	SetUpAbilitySystem();
 }
 
 void AVirgoHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -148,5 +139,26 @@ void AVirgoHeroCharacter::Input_Jump(const FInputActionValue& InputValue)
 	if (GetCharacterMovement()->IsJumpAllowed())
 	{
 		Jump();
+	}
+}
+
+void AVirgoHeroCharacter::SetUpAbilitySystem()
+{
+	AVirgoPlayerState* VirgoPlayerState = GetPlayerState<AVirgoPlayerState>();
+
+	check(VirgoPlayerState);
+
+	VirgoAbilitySystemComponent = VirgoPlayerState->GetVirgoAbilitySystemComponent();
+
+	VirgoAttributeSet = VirgoPlayerState->GetVirgoAttributeSet();
+
+	VirgoAbilitySystemComponent->InitAbilityActorInfo(VirgoPlayerState, this);
+
+	if (!HeroStartUpConfig.IsNull())
+	{
+		if (UDataAsset_HeroStartUpData* LoadData = HeroStartUpConfig.LoadSynchronous())
+		{
+			LoadData->GiveToAbilitySystemComponent(VirgoAbilitySystemComponent);
+		}
 	}
 }
