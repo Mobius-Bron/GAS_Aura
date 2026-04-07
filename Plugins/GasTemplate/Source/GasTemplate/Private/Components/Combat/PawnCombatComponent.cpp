@@ -126,6 +126,33 @@ AWeaponBase* UPawnCombatComponent::GetCharacterCurrentEquippedWeapon() const
 	return GetCharacterCarriedWeaponByTag(CurrentEquippedWeaponTag);
 }
 
+TArray<FGameplayTag> UPawnCombatComponent::GetAllCarriedWeaponTags() const
+{
+	TArray<FGameplayTag> AllWeaponTags;
+
+	if (CharacterCarriedWeaponMap.Num() == 0)
+	{
+		return AllWeaponTags;
+	}
+
+	CharacterCarriedWeaponMap.GetKeys(AllWeaponTags);
+
+	return AllWeaponTags;
+}
+
+void UPawnCombatComponent::DestroyAllWeapons()
+{
+	TArray<FGameplayTag> AllWeaponTags = GetAllCarriedWeaponTags();
+
+	for (const FGameplayTag& WeaponTag : AllWeaponTags)
+	{
+		UnregisterAndDestoryWeapon(WeaponTag);
+	}
+
+	OverlappedActors.Empty();
+	CurrentEquippedWeaponTag = FGameplayTag();
+}
+
 void UPawnCombatComponent::ToggleWeaponCollision(bool bShouldEnable, EToggleDamageType DamageType)
 {
 	if (DamageType == EToggleDamageType::CurrentEquippedWeapon)

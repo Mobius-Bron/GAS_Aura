@@ -40,6 +40,12 @@ public:
 	AWeaponBase* GetCharacterCurrentEquippedWeapon() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Virgo|Combat")
+	TArray<FGameplayTag> GetAllCarriedWeaponTags() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Virgo|Combat")
+	void DestroyAllWeapons();
+
+	UFUNCTION(BlueprintCallable, Category = "Virgo|Combat")
 	void ToggleWeaponCollision(bool bShouldEnable, EToggleDamageType DamageType = EToggleDamageType::CurrentEquippedWeapon);
 
 	virtual void OnHitTargetActor(AActor* TargetActor);
