@@ -40,7 +40,7 @@ void UHeroCombatComponent::OnHitTargetActor(AActor* TargetActor)
 
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
 		GetOwingPawn(),
-		VirgoGameplayTags::Player_Event_HitPause,
+		VirgoGameplayTags::Shared_Event_HitPause,
 		FGameplayEventData()
 	);
 }

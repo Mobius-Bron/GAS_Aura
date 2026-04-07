@@ -20,7 +20,9 @@ namespace VirgoGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Ability_Death, "Shared.Ability.Death");
 
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_MeleeHit, "Shared.Event.MeleeHit");
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_RangedHit, "Shared.Event.RangedHit");
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact, "Shared.Event.HitReact");
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitPause, "Shared.Event.HitPause");
 
 	UE_DEFINE_GAMEPLAY_TAG(Shared_SetByCaller_BaseDamage, "Shared.SetByCaller.BaseDamage");
 
@@ -29,17 +31,17 @@ namespace VirgoGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Unequip, "Player.Ability.Unequip");
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_HitPause, "Player.Ability.HitPause");
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Sword, "Player.Ability.Attack.Sword");
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_FireBall, "Player.Ability.Attack.FireBall");
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_Sword, "Player.Weapon.Sword");
-
-	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Equip, "Player.Event.Equip");
-	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Unequip, "Player.Event.Unequip");
-	UE_DEFINE_GAMEPLAY_TAG(Player_Event_HitPause, "Player.Event.HitPause");
-	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Attack_Sword, "Player.Event.Attack.Sword");
+	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_AuraStaff, "Player.Weapon.AuraStaff");
 
 	/* Enemy Tags */
-	UE_DEFINE_GAMEPLAY_TAG(Enemy_Ability_Melee, "Enemy.Ability.Melee");
-	UE_DEFINE_GAMEPLAY_TAG(Enemy_Ability_Ranged, "Enemy.Ability.Ranged");
+	UE_DEFINE_GAMEPLAY_TAG(Enemy_Ability_MeleeAttack, "Enemy.Ability.MeleeAttack");
+	UE_DEFINE_GAMEPLAY_TAG(Enemy_Ability_RangedAttack, "Enemy.Ability.RangedAttack");
 
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon_Sword, "Enemy.Weapon.Sword");
+	UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon_ShamanStaff, "Enemy.Weapon.ShamanStaff");
+	UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon_Slingshot, "Enemy.Weapon.Slingshot");
+	UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon_Spear, "Enemy.Weapon.Spear");
 }
