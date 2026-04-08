@@ -19,6 +19,8 @@
 
 AVirgoHeroCharacter::AVirgoHeroCharacter()
 {
+	Tags.Add(FName("Player"));
+
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 90.f);
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));

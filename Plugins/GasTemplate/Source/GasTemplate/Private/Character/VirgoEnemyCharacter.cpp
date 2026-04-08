@@ -4,7 +4,10 @@
 #include "Character/VirgoEnemyCharacter.h"
 #include "Engine/AssetManager.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "BehaviorTree/BehaviorTree.h"
+#include "BehaviorTree/BlackboardData.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
+#include "BehaviorTree/BlackboardComponent.h"
 
 #include "AbilitySystem/VirgoAbilitySystemComponent.h"
 #include "AbilitySystem/VirgoAttributeSet.h"
@@ -15,6 +18,8 @@
 
 AVirgoEnemyCharacter::AVirgoEnemyCharacter()
 {
+	Tags.Add(FName("Enemy"));
+
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
@@ -29,11 +34,6 @@ AVirgoEnemyCharacter::AVirgoEnemyCharacter()
 	VirgoAttributeSet = CreateDefaultSubobject<UVirgoAttributeSet>(TEXT("VirgoAttributeSet"));
 
 	EnemyCombatComponent = CreateDefaultSubobject<UEnemyCombatComponent>(TEXT("EnemyCombatComponent"));
-
-	// AI
-	BehaviorTreeComponent = CreateDefaultSubobject<UBehaviorTreeComponent>("BehaviorTreeComponent");
-
-	VirgoAIController = CreateDefaultSubobject<AVirgoAIController>("VirgoAIController");
 }
 
 UAbilitySystemComponent* AVirgoEnemyCharacter::GetAbilitySystemComponent() const
@@ -58,7 +58,13 @@ void AVirgoEnemyCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
-	VirgoAIController = Cast<AVirgoAIController>(NewController);
+	if (HasAuthority() && BehaviorTree != nullptr)
+	{
+		VirgoAIController = Cast<AVirgoAIController>(NewController);
+
+		VirgoAIController->GetBlackboardComponent()->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
+		VirgoAIController->RunBehaviorTree(BehaviorTree);
+	}
 }
 
 void AVirgoEnemyCharacter::InitEnemyStartUpData()

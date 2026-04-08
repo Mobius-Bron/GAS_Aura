@@ -1,0 +1,39 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "AI/BTService/BTService_FindNearestPlayer.h"
+#include "AIController.h"
+#include "BehaviorTree/BTFunctionLibrary.h"
+#include "Kismet//GameplayStatics.h"
+
+void UBTService_FindNearestPlayer::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
+{
+	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
+
+	APawn* OwningPawn = AIOwner->GetPawn();
+
+	const FName TargetTag = OwningPawn->ActorHasTag(FName("Player")) ? FName("Enemy") : FName("Player");
+
+	TArray<AActor*> ActorsWithTag;
+	UGameplayStatics::GetAllActorsWithTag(OwningPawn, TargetTag, ActorsWithTag);
+
+	float ClosestDistance = TNumericLimits<float>::Max();
+	AActor* ClosestActor = nullptr;
+
+	for (AActor* TargetActor : ActorsWithTag)
+	{
+		if (IsValid(TargetActor) && IsValid(OwningPawn))
+		{
+			float Distance = OwningPawn->GetDistanceTo(TargetActor);
+			if (Distance < ClosestDistance)
+			{
+				ClosestDistance = Distance;
+				ClosestActor = TargetActor;
+			}
+		}
+	}
+
+	// ·µ»ØÊýÖµ
+	UBTFunctionLibrary::SetBlackboardValueAsObject(this, TargetToFollowSelector, ClosestActor);
+	UBTFunctionLibrary::SetBlackboardValueAsFloat(this, DistanceToTargetSelector, ClosestDistance);
+}

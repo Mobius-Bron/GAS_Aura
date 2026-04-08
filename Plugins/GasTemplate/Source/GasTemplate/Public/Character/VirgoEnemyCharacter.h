@@ -7,7 +7,7 @@
 #include "AbilitySystemInterface.h"
 #include "VirgoEnemyCharacter.generated.h"
 
-class UBehaviorTreeComponent;
+class UBehaviorTree;
 
 class UEnemyCombatComponent;
 class UDataAsset_EnemyStartUpData;
@@ -43,10 +43,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "CharacterData", meta = (AllowPrivateAccess = "true"))
 	TSoftObjectPtr<UDataAsset_EnemyStartUpData> EnemyStartUpConfig;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AI")
-	TObjectPtr<UBehaviorTreeComponent> BehaviorTreeComponent;
+	UPROPERTY(EditAnywhere, Category = "AI")
+	TObjectPtr<UBehaviorTree> BehaviorTree;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AI")
+	UPROPERTY()
 	TObjectPtr<AVirgoAIController> VirgoAIController;
 
 private:

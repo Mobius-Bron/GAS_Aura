@@ -7,7 +7,7 @@
 
 AVirgoAIController::AVirgoAIController()
 {
-	BlackboardComponent = CreateDefaultSubobject<UBlackboardComponent>("BlackboardComponent");
+	Blackboard = CreateDefaultSubobject<UBlackboardComponent>("BlackboardComponent");
 
 	BehaviorTreeComponent = CreateDefaultSubobject<UBehaviorTreeComponent>("BehaviorTreeComponent");
 }
