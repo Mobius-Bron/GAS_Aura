@@ -33,6 +33,21 @@ void UVirgoGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle Handle, 
 	}
 }
 
+void UVirgoGameplayAbility::ActivateAbility(
+	const FGameplayAbilitySpecHandle Handle, 
+	const FGameplayAbilityActorInfo* ActorInfo, 
+	const FGameplayAbilityActivationInfo ActivationInfo, 
+	const FGameplayEventData* TriggerEventData)
+{
+	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
+
+	const bool bIsServer = HasAuthority(&ActivationInfo);
+	if (!bIsServer) { return; }
+
+
+
+}
+
 UPawnCombatComponent* UVirgoGameplayAbility::GetPawnCombatComponentFromActorInfo() const
 {
 	return GetAvatarActorFromActorInfo()->GetComponentByClass<UPawnCombatComponent>();

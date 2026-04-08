@@ -21,6 +21,7 @@ namespace VirgoGameplayTags
 
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_MeleeHit, "Shared.Event.MeleeHit");
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_RangedHit, "Shared.Event.RangedHit");
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_SpawnBullet, "Shared.Event.SpawnBullet");
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact, "Shared.Event.HitReact");
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitPause, "Shared.Event.HitPause");
 

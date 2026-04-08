@@ -31,6 +31,8 @@ protected:
 	virtual void EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled) override;
 	/* GameplayAbility */
 
+	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Virgo|Ability")
 	EVirgoAbilityActionPolicy AbilityActionPolicy = EVirgoAbilityActionPolicy::OnTriggered;
 
