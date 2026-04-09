@@ -10,6 +10,7 @@
 
 class UVirgoAbilitySystemComponent;
 class UVirgoAttributeSet;
+class UMotionWarpingComponent;
 
 UCLASS()
 class GASTEMPLATE_API AVirgoCharacterBase : 
@@ -39,6 +40,9 @@ protected:
 	TObjectPtr<UVirgoAttributeSet> VirgoAttributeSet;
 #pragma endregion
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<UMotionWarpingComponent> MotionWarpingComponent;
+
 public:
 	FORCEINLINE UVirgoAbilitySystemComponent* GetVirgoAbilitySystemComponent() const
 	{
@@ -48,5 +52,10 @@ public:
 	FORCEINLINE UVirgoAttributeSet* GetVirgoAttributeSet() const
 	{
 		return VirgoAttributeSet;
+	}
+
+	FORCEINLINE UMotionWarpingComponent* GetMotionWarpingComponent() const
+	{
+		return MotionWarpingComponent;
 	}
 };

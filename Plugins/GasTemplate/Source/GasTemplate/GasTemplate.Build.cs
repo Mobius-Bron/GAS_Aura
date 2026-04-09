@@ -37,7 +37,8 @@ public class GasTemplate : ModuleRules
                 "GameplayTasks",
                 "GameplayAbilities",
                 "ModularGameplay",
-				"AIModule",
+                "MotionWarping",
+                "AIModule",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);

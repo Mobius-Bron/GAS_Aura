@@ -2,6 +2,7 @@
 
 
 #include "Character/VirgoCharacterBase.h"
+#include "MotionWarpingComponent.h"
 
 #include "AbilitySystem/VirgoAbilitySystemComponent.h"
 #include "AbilitySystem/VirgoAttributeSet.h"
@@ -16,6 +17,8 @@ AVirgoCharacterBase::AVirgoCharacterBase()
 
 	// 默认不接收和显示贴花
 	GetMesh()->bReceivesDecals = false;
+
+	MotionWarpingComponent = CreateDefaultSubobject<UMotionWarpingComponent>(TEXT("MotionWarpingComponent"));
 }
 
 UAbilitySystemComponent* AVirgoCharacterBase::GetAbilitySystemComponent() const

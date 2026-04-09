@@ -4,10 +4,12 @@
 #include "GAS_FunctionLibrary.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
+#include "MotionWarpingComponent.h"
 
 #include "Components/Combat/PawnCombatComponent.h"
 #include "Interfaces/PawnCombatInterface.h"
 #include "AbilitySystem/VirgoAbilitySystemComponent.h"
+#include "Character/VirgoCharacterBase.h"
 
 UPawnCombatComponent* UGAS_FunctionLibrary::NativeGetCombatComponentFromActor(AActor* InActor)
 {
@@ -47,7 +49,7 @@ UPawnCombatComponent* UGAS_FunctionLibrary::BP_GetCombatComponentFromActor(AActo
     return CombatComponent;
 }
 
-void UGAS_FunctionLibrary::TryActiveAbilityByEventTag(const FGameplayTag& EventTag, UAbilitySystemComponent* ASC)
+void UGAS_FunctionLibrary::TryActiveAbilityByEventTag(UAbilitySystemComponent* ASC, const FGameplayTag& EventTag)
 {
     if (!EventTag.IsValid()) { return; }
 
@@ -57,4 +59,12 @@ void UGAS_FunctionLibrary::TryActiveAbilityByEventTag(const FGameplayTag& EventT
 
         ASC->TryActivateAbility(AbilitySpec.Handle);
     }
+}
+
+void UGAS_FunctionLibrary::SetFacingTarget(AVirgoCharacterBase* Character, const FName& TargetName, const FVector& FacingLocation)
+{
+    Character->GetMotionWarpingComponent()->AddOrUpdateWarpTargetFromLocation(
+        TargetName,
+        FacingLocation
+    );
 }

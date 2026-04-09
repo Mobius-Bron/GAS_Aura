@@ -13,6 +13,7 @@
 class UPawnCombatComponent;
 class UAbilitySystemComponent;
 class UVirgoAbilitySystemComponent;
+class AVirgoCharacterBase;
 
 /**
  * 
@@ -33,5 +34,8 @@ public:
 	static UPawnCombatComponent* BP_GetCombatComponentFromActor(AActor* InActor, EVirgoValidType& ValidType);
 
 	UFUNCTION(BlueprintCallable, Category = "Virgo|Ability")
-	static void TryActiveAbilityByEventTag(const FGameplayTag& EventTag, UAbilitySystemComponent* ASC);
+	static void TryActiveAbilityByEventTag(UAbilitySystemComponent* ASC, const FGameplayTag& EventTag);
+
+	UFUNCTION(BlueprintCallable, Category = "Virgo|MontionWarping")
+	static void SetFacingTarget(AVirgoCharacterBase* Character, const FName& TargetName, const FVector& FacingLocation);
 };
