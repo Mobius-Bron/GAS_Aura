@@ -12,20 +12,20 @@
 class UInputMappingContext;
 
 USTRUCT(BlueprintType)
-struct FVirgoHeroAbilitySet
+struct FVirgoCharacterAbilitySet
 {
 	GENERATED_BODY()
 
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	FGameplayTag InputTag;
+	FGameplayTag EventTag;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<UVirgoGameplayAbility> AbilityToGrant;
 
 	bool IsValid() const
 	{
-		return InputTag.IsValid() && AbilityToGrant != nullptr;
+		return EventTag.IsValid() && AbilityToGrant != nullptr;
 	}
 };
 
@@ -42,5 +42,5 @@ public:
 	UInputMappingContext* WeaponInputMappingContext;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (TitleProperty = "InputTag"))
-	TArray<FVirgoHeroAbilitySet> WeaponAbilityToGrant;
+	TArray<FVirgoCharacterAbilitySet> WeaponAbilityToGrant;
 };

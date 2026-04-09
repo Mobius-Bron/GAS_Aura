@@ -9,14 +9,14 @@ void UDataAsset_HeroStartUpData::GiveToAbilitySystemComponent(UVirgoAbilitySyste
 {
 	Super::GiveToAbilitySystemComponent(InVASCToGive, ApplyLevel);
 
-	for (const FVirgoHeroAbilitySet& HeroAbilitySet : HeroStartUpAbilitySets)
+	for (const FVirgoCharacterAbilitySet& HeroAbilitySet : HeroStartUpAbilitySets)
 	{
 		if (!HeroAbilitySet.IsValid()) { continue; }
 
 		FGameplayAbilitySpec AbilitySpec(HeroAbilitySet.AbilityToGrant);
 		AbilitySpec.SourceObject = InVASCToGive->GetAvatarActor();
 		AbilitySpec.Level = ApplyLevel;
-		AbilitySpec.GetDynamicSpecSourceTags().AddTag(HeroAbilitySet.InputTag);
+		AbilitySpec.GetDynamicSpecSourceTags().AddTag(HeroAbilitySet.EventTag);
 
 		InVASCToGive->GiveAbility(AbilitySpec);
 	}

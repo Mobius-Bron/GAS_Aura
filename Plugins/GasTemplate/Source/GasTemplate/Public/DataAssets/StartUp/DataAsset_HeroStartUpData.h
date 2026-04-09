@@ -21,6 +21,6 @@ public:
 	virtual void GiveToAbilitySystemComponent(UVirgoAbilitySystemComponent* InVASCToGive, int32 ApplyLevel = 1) override;
 
 private:
-	UPROPERTY(EditAnywhere, Category = "StartUpData", meta = (TitleProperty = "InputTag"))
-	TArray<FVirgoHeroAbilitySet> HeroStartUpAbilitySets;
+	UPROPERTY(EditAnywhere, Category = "StartUpData", meta = (TitleProperty = "EventTag"))
+	TArray<FVirgoCharacterAbilitySet> HeroStartUpAbilitySets;
 };

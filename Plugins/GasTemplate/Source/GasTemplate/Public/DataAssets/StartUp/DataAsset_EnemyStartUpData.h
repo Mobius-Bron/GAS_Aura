@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "DataAssets/StartUp/DataAsset_StartUpDataBase.h"
 #include "AbilitySystem/Abilities/VirgoEnemyGameplayAbility.h"
+
+#include "DataTypes/VirgoStructTypes.h"
 #include "DataAsset_EnemyStartUpData.generated.h"
 
 /**
@@ -19,6 +21,6 @@ public:
 	virtual void GiveToAbilitySystemComponent(UVirgoAbilitySystemComponent* InVASCToGive, int32 ApplyLevel = 1) override;
 
 private:
-	UPROPERTY(EditAnywhere, Category = "StartUpData")
-	TArray<TSubclassOf<UVirgoEnemyGameplayAbility>> EnemyStartUpAbilitySets;
+	UPROPERTY(EditAnywhere, Category = "StartUpData", meta = (TitleProperty = "EventTag"))
+	TArray<FVirgoCharacterAbilitySet> EnemyStartUpAbilitySets;
 };

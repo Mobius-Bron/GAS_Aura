@@ -3,6 +3,7 @@
 
 #include "GAS_FunctionLibrary.h"
 #include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystemComponent.h"
 
 #include "Components/Combat/PawnCombatComponent.h"
 #include "Interfaces/PawnCombatInterface.h"
@@ -44,4 +45,16 @@ UPawnCombatComponent* UGAS_FunctionLibrary::BP_GetCombatComponentFromActor(AActo
     ValidType = CombatComponent ? EVirgoValidType::Valid : EVirgoValidType::Invalid;
 
     return CombatComponent;
+}
+
+void UGAS_FunctionLibrary::TryActiveAbilityByEventTag(const FGameplayTag& EventTag, UAbilitySystemComponent* ASC)
+{
+    if (!EventTag.IsValid()) { return; }
+
+    for (const FGameplayAbilitySpec& AbilitySpec : ASC->GetActivatableAbilities())
+    {
+        if (!AbilitySpec.GetDynamicSpecSourceTags().HasTagExact(EventTag)) { continue; }
+
+        ASC->TryActivateAbility(AbilitySpec.Handle);
+    }
 }

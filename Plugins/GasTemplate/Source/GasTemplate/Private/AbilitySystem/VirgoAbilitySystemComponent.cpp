@@ -9,18 +9,18 @@ UVirgoAbilitySystemComponent::UVirgoAbilitySystemComponent()
 	SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
 }
 
-void UVirgoAbilitySystemComponent::GrantHeroAbilities(const TArray<FVirgoHeroAbilitySet>& AbilitySet, int32 ApplyLevel, TArray<FGameplayAbilitySpecHandle>& OutGrantedAbilitySpecHandle)
+void UVirgoAbilitySystemComponent::GrantHeroAbilities(const TArray<FVirgoCharacterAbilitySet>& AbilitySet, int32 ApplyLevel, TArray<FGameplayAbilitySpecHandle>& OutGrantedAbilitySpecHandle)
 {
 	if (AbilitySet.IsEmpty()) { return; }
 
-	for (const FVirgoHeroAbilitySet& HeroAbilitySet : AbilitySet)
+	for (const FVirgoCharacterAbilitySet& HeroAbilitySet : AbilitySet)
 	{
 		if (!HeroAbilitySet.IsValid()) { continue; }
 
 		FGameplayAbilitySpec AbilitySpec(HeroAbilitySet.AbilityToGrant);
 		AbilitySpec.SourceObject = this->GetAvatarActor();
 		AbilitySpec.Level = ApplyLevel;
-		AbilitySpec.GetDynamicSpecSourceTags().AddTag(HeroAbilitySet.InputTag);
+		AbilitySpec.GetDynamicSpecSourceTags().AddTag(HeroAbilitySet.EventTag);
 
 		this->GiveAbility(AbilitySpec);
 

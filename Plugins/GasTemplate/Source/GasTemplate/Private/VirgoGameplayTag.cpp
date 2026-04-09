@@ -41,6 +41,9 @@ namespace VirgoGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Ability_MeleeAttack, "Enemy.Ability.MeleeAttack");
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Ability_RangedAttack, "Enemy.Ability.RangedAttack");
 
+	UE_DEFINE_GAMEPLAY_TAG(Enemy_Event_MeleeAttack, "Enemy.Event.MeleeAttack");
+	UE_DEFINE_GAMEPLAY_TAG(Enemy_Event_RangedAttack, "Enemy.Event.RangedAttack");
+
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon_Sword, "Enemy.Weapon.Sword");
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon_ShamanStaff, "Enemy.Weapon.ShamanStaff");
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon_Slingshot, "Enemy.Weapon.Slingshot");

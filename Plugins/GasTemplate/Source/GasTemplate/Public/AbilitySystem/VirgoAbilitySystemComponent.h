@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "AbilitySystemComponent.h"
 #include "GameplayTagContainer.h"
+
 #include "DataTypes/VirgoStructTypes.h"
 #include "VirgoAbilitySystemComponent.generated.h"
 
@@ -20,7 +21,7 @@ public:
 	UVirgoAbilitySystemComponent();
 
 	UFUNCTION(BlueprintCallable, meta = (ApplyLevel = "1"))
-	void GrantHeroAbilities(const TArray<FVirgoHeroAbilitySet>& AbilitySet, int32 ApplyLevel, TArray<FGameplayAbilitySpecHandle>& OutGrantedAbilitySpecHandle);
+	void GrantHeroAbilities(const TArray<FVirgoCharacterAbilitySet>& AbilitySet, int32 ApplyLevel, TArray<FGameplayAbilitySpecHandle>& OutGrantedAbilitySpecHandle);
 
 	UFUNCTION(BlueprintCallable, meta = (ApplyLevel = "1"))
 	void RemoveHeroAbilities(UPARAM(ref) TArray<FGameplayAbilitySpecHandle>& AbilitySpecHandlesToRemove);

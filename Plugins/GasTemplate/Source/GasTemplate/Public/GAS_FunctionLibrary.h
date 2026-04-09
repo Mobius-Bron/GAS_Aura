@@ -5,10 +5,13 @@
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "NativeGameplayTags.h"
+#include "GameplayTagContainer.h"
+
 #include "DataTypes/VirgoEnumTypes.h"
 #include "GAS_FunctionLibrary.generated.h"
 
 class UPawnCombatComponent;
+class UAbilitySystemComponent;
 class UVirgoAbilitySystemComponent;
 
 /**
@@ -28,4 +31,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Virgo|Combat", meta = (DisplayName = "Get pawn combat component", ExpandEnumAsExecs = "ValidType"))
 	static UPawnCombatComponent* BP_GetCombatComponentFromActor(AActor* InActor, EVirgoValidType& ValidType);
+
+	UFUNCTION(BlueprintCallable, Category = "Virgo|Ability")
+	static void TryActiveAbilityByEventTag(const FGameplayTag& EventTag, UAbilitySystemComponent* ASC);
 };

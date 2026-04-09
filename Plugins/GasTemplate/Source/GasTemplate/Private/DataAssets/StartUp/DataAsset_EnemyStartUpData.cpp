@@ -7,13 +7,14 @@ void UDataAsset_EnemyStartUpData::GiveToAbilitySystemComponent(UVirgoAbilitySyst
 {
 	Super::GiveToAbilitySystemComponent(InVASCToGive, ApplyLevel);
 
-	for (const TSubclassOf<UVirgoEnemyGameplayAbility>& EnemyAbilitySet : EnemyStartUpAbilitySets)
+	for (const FVirgoCharacterAbilitySet& EnemyAbilitySet : EnemyStartUpAbilitySets)
 	{
-		if (EnemyAbilitySet == nullptr) { continue; }
+		if (!EnemyAbilitySet.IsValid()) { continue; }
 
-		FGameplayAbilitySpec AbilitySpec(EnemyAbilitySet);
+		FGameplayAbilitySpec AbilitySpec(EnemyAbilitySet.AbilityToGrant);
 		AbilitySpec.SourceObject = InVASCToGive->GetAvatarActor();
 		AbilitySpec.Level = ApplyLevel;
+		AbilitySpec.GetDynamicSpecSourceTags().AddTag(EnemyAbilitySet.EventTag);
 
 		InVASCToGive->GiveAbility(AbilitySpec);
 	}
