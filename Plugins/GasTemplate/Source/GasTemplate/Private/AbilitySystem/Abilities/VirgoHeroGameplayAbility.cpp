@@ -33,25 +33,3 @@ UHeroCombatComponent* UVirgoHeroGameplayAbility::GetHeroCombatComponentFromActor
 {
 	return GetHeroCharacterFromActorInfo()->GetHeroCombatComponent();
 }
-
-FGameplayEffectSpecHandle UVirgoHeroGameplayAbility::MakeHeroDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass, float InWeaponBaseDamage)
-{
-	check(EffectClass);
-	FGameplayEffectContextHandle ContextHandle = GetVirgoAbilitySystemComponent()->MakeEffectContext();
-	ContextHandle.SetAbility(this);
-	ContextHandle.AddSourceObject(GetAvatarActorFromActorInfo());
-	ContextHandle.AddInstigator(GetAvatarActorFromActorInfo(), GetAvatarActorFromActorInfo());
-
-	FGameplayEffectSpecHandle EffectSpecHandle = GetVirgoAbilitySystemComponent()->MakeOutgoingSpec(
-		EffectClass,
-		GetAbilityLevel(),
-		ContextHandle
-	);
-
-	EffectSpecHandle.Data->SetSetByCallerMagnitude(
-		VirgoGameplayTags::Shared_SetByCaller_BaseDamage,
-		InWeaponBaseDamage
-	);
-
-	return EffectSpecHandle;
-}

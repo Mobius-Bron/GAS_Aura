@@ -13,5 +13,8 @@ UCLASS()
 class GASTEMPLATE_API UEnemyCombatComponent : public UPawnCombatComponent
 {
 	GENERATED_BODY()
-	
+
+public:
+	virtual void OnHitTargetActor(AActor* TargetActor) override;
+	virtual void OnPulledFromTargetActor(AActor* TargetActor) override;
 };

@@ -49,7 +49,7 @@ void UVirgoAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallb
 
 		// ´¥·¢Í¨Öª
 		// ËÀÍö
-		if (NewCurrentHealth == 0.0f)
+		if (NewCurrentHealth <= 0.0f)
 		{
 			UGAS_FunctionLibrary::AddGameplayTagToActorIfNone(
 				Data.Target.GetAvatarActor(), 

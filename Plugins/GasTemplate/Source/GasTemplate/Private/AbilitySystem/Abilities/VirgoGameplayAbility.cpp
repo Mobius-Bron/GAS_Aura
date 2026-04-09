@@ -78,3 +78,20 @@ FActiveGameplayEffectHandle UVirgoGameplayAbility::BP_ApplyEffectHandleToTarget(
 
 	return EffectHandle;
 }
+
+FGameplayEffectSpecHandle UVirgoGameplayAbility::MakeDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass)
+{
+	check(EffectClass);
+	FGameplayEffectContextHandle ContextHandle = GetVirgoAbilitySystemComponent()->MakeEffectContext();
+	ContextHandle.SetAbility(this);
+	ContextHandle.AddSourceObject(GetAvatarActorFromActorInfo());
+	ContextHandle.AddInstigator(GetAvatarActorFromActorInfo(), GetAvatarActorFromActorInfo());
+
+	FGameplayEffectSpecHandle EffectSpecHandle = GetVirgoAbilitySystemComponent()->MakeOutgoingSpec(
+		EffectClass,
+		GetAbilityLevel(),
+		ContextHandle
+	);
+
+	return EffectSpecHandle;
+}

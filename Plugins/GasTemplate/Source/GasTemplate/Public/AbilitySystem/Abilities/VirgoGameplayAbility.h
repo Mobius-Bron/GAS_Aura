@@ -47,4 +47,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Virgo|Ability", meta = (DisplayName = "Apply Effect Handle To Target", ExpandEnumAsExecs = "SuccessType"))
 	FActiveGameplayEffectHandle BP_ApplyEffectHandleToTarget(AActor* TargetActor, const FGameplayEffectSpecHandle& InSpecHandle, EVirgoSuccessType& SuccessType);
+	
+	// ¡Ÿ ±…À∫¶º∆À„
+	UFUNCTION(BlueprintPure, Category = "Virgo|Ability")
+	FGameplayEffectSpecHandle MakeDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass);
+
 };

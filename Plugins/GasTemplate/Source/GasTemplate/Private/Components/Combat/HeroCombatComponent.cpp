@@ -7,6 +7,7 @@
 
 #include "VirgoGameplayTag.h"
 #include "Items/Weapons/VirgoHeroWeapon.h"
+#include "Character/VirgoHeroCharacter.h"
 
 AVirgoHeroWeapon* UHeroCombatComponent::GetHeroCarriedWeaponByTag(FGameplayTag WeaponTag) const
 {
@@ -25,6 +26,7 @@ AVirgoHeroWeapon* UHeroCombatComponent::GetHeroCurrentEquippedWeapon() const
 void UHeroCombatComponent::OnHitTargetActor(AActor* TargetActor)
 {
 	if (OverlappedActors.Contains(TargetActor)) { return; }
+	if (AVirgoHeroCharacter* HeroCharacter = Cast<AVirgoHeroCharacter>(TargetActor)) { return; }
 
 	OverlappedActors.AddUnique(TargetActor);
 
