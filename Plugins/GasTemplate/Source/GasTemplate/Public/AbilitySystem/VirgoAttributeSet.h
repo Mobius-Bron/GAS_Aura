@@ -34,6 +34,14 @@ public:
 	FGameplayAttributeData CurrentHealth;
 	ATTRIBUTE_ACCESSORS(UVirgoAttributeSet, CurrentHealth);
 
+	UPROPERTY(BlueprintReadOnly, Category = "Attribute|Mana", ReplicatedUsing = OnRep_MaxMana)
+	FGameplayAttributeData MaxMana;
+	ATTRIBUTE_ACCESSORS(UVirgoAttributeSet, MaxMana);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Attribute|Mana", ReplicatedUsing = OnRep_CurrentMana)
+	FGameplayAttributeData CurrentMana;
+	ATTRIBUTE_ACCESSORS(UVirgoAttributeSet, CurrentMana);
+
 	UPROPERTY(BlueprintReadOnly, Category = "Attribute|Attack", ReplicatedUsing = OnRep_AttackPower)
 	FGameplayAttributeData AttackPower;
 	ATTRIBUTE_ACCESSORS(UVirgoAttributeSet, AttackPower);
@@ -47,6 +55,10 @@ public:
 	FGameplayAttributeData DamageTaken;
 	ATTRIBUTE_ACCESSORS(UVirgoAttributeSet, DamageTaken);
 
+	UPROPERTY(BlueprintReadOnly, Category = "Attribute|Cost")
+	FGameplayAttributeData ManaCost;
+	ATTRIBUTE_ACCESSORS(UVirgoAttributeSet, ManaCost);
+
 	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 
 	// Replicate
@@ -55,6 +67,12 @@ public:
 
 	UFUNCTION()
 	void OnRep_CurrentHealth(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	void OnRep_MaxMana(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	void OnRep_CurrentMana(const FGameplayAttributeData& OldValue);
 
 	UFUNCTION()
 	void OnRep_AttackPower(const FGameplayAttributeData& OldValue);

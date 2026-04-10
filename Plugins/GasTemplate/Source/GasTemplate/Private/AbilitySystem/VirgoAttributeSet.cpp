@@ -11,8 +11,10 @@
 
 UVirgoAttributeSet::UVirgoAttributeSet()
 {
-	InitMaxHealth(1.0f);
-	InitCurrentHealth(1.0f);
+	InitMaxHealth(100.0f);
+	InitCurrentHealth(50.0f);
+	InitMaxMana(100.0f);
+	InitCurrentMana(50.0f);
 	InitAttackPower(1.0f);
 	InitDefensePower(1.0f);
 }
@@ -23,6 +25,8 @@ void UVirgoAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 
 	DOREPLIFETIME_CONDITION_NOTIFY(UVirgoAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UVirgoAttributeSet, CurrentHealth, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UVirgoAttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UVirgoAttributeSet, CurrentMana, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UVirgoAttributeSet, AttackPower, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UVirgoAttributeSet, DefensePower, COND_None, REPNOTIFY_Always);
 }
@@ -34,6 +38,12 @@ void UVirgoAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallb
 		const float NewCurrentHealth = FMath::Clamp(GetCurrentHealth(), 0.0f, GetMaxHealth());
 
 		SetCurrentHealth(NewCurrentHealth);
+	}
+	if (Data.EvaluatedData.Attribute == GetCurrentManaAttribute())
+	{
+		const float NewCurrentMana = FMath::Clamp(GetCurrentMana(), 0.0f, GetMaxMana());
+
+		SetCurrentHealth(NewCurrentMana);
 	}
 
 	if (Data.EvaluatedData.Attribute == GetDamageTakenAttribute())
@@ -68,6 +78,16 @@ void UVirgoAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& OldValue)
 void UVirgoAttributeSet::OnRep_CurrentHealth(const FGameplayAttributeData& OldValue)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UVirgoAttributeSet, CurrentHealth, OldValue);
+}
+
+void UVirgoAttributeSet::OnRep_MaxMana(const FGameplayAttributeData& OldValue)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UVirgoAttributeSet, MaxMana, OldValue);
+}
+
+void UVirgoAttributeSet::OnRep_CurrentMana(const FGameplayAttributeData& OldValue)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UVirgoAttributeSet, CurrentMana, OldValue);
 }
 
 void UVirgoAttributeSet::OnRep_AttackPower(const FGameplayAttributeData& OldValue)

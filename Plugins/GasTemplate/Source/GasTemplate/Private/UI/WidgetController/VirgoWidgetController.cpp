@@ -12,3 +12,11 @@ void UVirgoWidgetController::SetWidgetControllerParams(const FWidgetControllerPa
 	AbilitySystemComponent = InWCParams.AbilitySystemComponent;
 	AttributeSet = InWCParams.AttributeSet;
 }
+
+void UVirgoWidgetController::BroadcastInitValues()
+{
+}
+
+void UVirgoWidgetController::BindCallbacksToDependencies()
+{
+}

@@ -16,6 +16,8 @@
 #include "Components/Combat/HeroCombatComponent.h"
 #include "AbilitySystem/VirgoAbilitySystemComponent.h"
 #include "AbilitySystem/VirgoAttributeSet.h"
+#include "Controller/VirgoController.h"
+#include "UI/HUD/VirgoHUD.h"
 
 AVirgoHeroCharacter::AVirgoHeroCharacter()
 {
@@ -161,6 +163,14 @@ void AVirgoHeroCharacter::SetUpAbilitySystem()
 		if (UDataAsset_HeroStartUpData* LoadData = HeroStartUpConfig.LoadSynchronous())
 		{
 			LoadData->GiveToAbilitySystemComponent(VirgoAbilitySystemComponent);
+		}
+	}
+
+	if (AVirgoController* VirgoController = Cast<AVirgoController>(GetController()))
+	{
+		if (AVirgoHUD* VirgoHUD = Cast<AVirgoHUD>(VirgoController->GetHUD()))
+		{
+			VirgoHUD->InitOverlay(VirgoController, VirgoPlayerState, VirgoAbilitySystemComponent, VirgoAttributeSet);
 		}
 	}
 }

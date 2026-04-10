@@ -20,13 +20,14 @@ void AVirgoHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySys
 	check(OverlayWidgetClass);
 	check(OverlayWidgetControllerClass);
 
-	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld, OverlayWidgetClass);
+	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass);
 	OverlayWidget = Cast<UVirgoUserWidget>(Widget);
 
 	const FWidgetControllerParams WidgetControllerParams(PC, PS, ASC, AS);
 	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(WidgetControllerParams);
 
 	OverlayWidget->SetWidgetController(WidgetController);
+	WidgetController->BroadcastInitValues();
 
 	Widget->AddToViewport();
 }
@@ -34,7 +35,4 @@ void AVirgoHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySys
 void AVirgoHUD::BeginPlay()
 {
 	Super::BeginPlay();
-
-	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass);
-	Widget->AddToViewport();
 }

@@ -28,15 +28,19 @@ public class GasTemplate : ModuleRules
 				"Core",
                 "CoreUObject",
                 "Engine",
+
 				"Slate",
 				"SlateCore",
 				"UMG",
+
                 "InputCore",
                 "EnhancedInput",
+
                 "GameplayTags",
                 "GameplayTasks",
                 "GameplayAbilities",
                 "ModularGameplay",
+
                 "MotionWarping",
                 "AIModule",
 				// ... add other public dependencies that you statically link with here ...
