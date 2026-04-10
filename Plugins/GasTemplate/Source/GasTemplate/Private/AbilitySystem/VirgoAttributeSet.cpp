@@ -43,7 +43,7 @@ void UVirgoAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallb
 	{
 		const float NewCurrentMana = FMath::Clamp(GetCurrentMana(), 0.0f, GetMaxMana());
 
-		SetCurrentHealth(NewCurrentMana);
+		SetCurrentMana(NewCurrentMana);
 	}
 
 	if (Data.EvaluatedData.Attribute == GetDamageTakenAttribute())
