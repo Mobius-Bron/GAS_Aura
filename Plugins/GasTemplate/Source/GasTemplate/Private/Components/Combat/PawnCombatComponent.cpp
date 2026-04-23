@@ -5,6 +5,9 @@
 #include "Components/BoxComponent.h"
 
 #include "Character/VirgoCharacterBase.h"
+#include "AbilitySystem/VirgoAbilitySystemComponent.h"
+#include "Items/Weapons/WeaponBase.h"
+#include "Items/Weapons/VirgoHeroWeapon.h"
 
 void UPawnCombatComponent::RegisterWeapon(FGameplayTag WeaponTag, AWeaponBase* SpwanWeapon, bool RegisterAsEquippedWeapon)
 {
@@ -80,6 +83,27 @@ void UPawnCombatComponent::SpawnAndRegisterWeapon(FGameplayTag WeaponTag, TSubcl
 		);
 	}
 	RegisterWeapon(WeaponTag, SpawnedWeapon, RegisterAsEquippedWeapon);
+
+	if(AVirgoHeroWeapon* HeroWeapon = Cast<AVirgoHeroWeapon>(SpawnedWeapon))
+	{
+		TArray<FGameplayAbilitySpecHandle> WeaponAbilitiesSpecHandles;
+
+		for (const FVirgoCharacterAbilitySet& HeroAbilitySet : HeroWeapon->WeaponData.WeaponAbilityToGrant)
+		{
+			if (!HeroAbilitySet.IsValid()) { continue; }
+
+			FGameplayAbilitySpec AbilitySpec(HeroAbilitySet.AbilityToGrant);
+			AbilitySpec.SourceObject = Character->GetAbilitySystemComponent()->GetAvatarActor();
+			AbilitySpec.Level = 1;
+			AbilitySpec.GetDynamicSpecSourceTags().AddTag(HeroAbilitySet.EventTag);
+
+			FGameplayAbilitySpecHandle AbilityHandle = Character->GetAbilitySystemComponent()->GiveAbility(AbilitySpec);
+
+			WeaponAbilitiesSpecHandles.AddUnique(AbilityHandle);
+		}
+
+		HeroWeapon->AssignGrantedHeroAbilitySpecHandles(WeaponAbilitiesSpecHandles);
+	}
 }
 
 void UPawnCombatComponent::UnregisterAndDestoryWeapon(FGameplayTag WeaponTag)
