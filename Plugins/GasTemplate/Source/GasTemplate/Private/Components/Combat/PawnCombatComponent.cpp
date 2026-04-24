@@ -112,12 +112,30 @@ void UPawnCombatComponent::UnregisterAndDestoryWeapon(FGameplayTag WeaponTag)
 	{
 		CharacterCarriedWeaponMap.Remove(WeaponTag);
 
+		AVirgoCharacterBase* Character = Cast<AVirgoCharacterBase>(GetOwner());
+
 		WeaponToDestroy->OnWeaponHitTarget.Unbind();
 		WeaponToDestroy->OnWeaponPulledFromTarget.Unbind();
 
 		if (CurrentEquippedWeaponTag == WeaponTag)
 		{
 			CurrentEquippedWeaponTag = FGameplayTag();
+		}
+
+		if (AVirgoHeroWeapon* HeroWeapon = Cast<AVirgoHeroWeapon>(WeaponToDestroy))
+		{
+			UAbilitySystemComponent* ASC = Character->GetAbilitySystemComponent();
+
+			if (ASC && HeroWeapon->GetGrantedHeroAbilitySpecHandles().Num() > 0)
+			{
+				TArray<FGameplayAbilitySpecHandle> HandlesToRemove = HeroWeapon->GetGrantedHeroAbilitySpecHandles();
+
+				for (const FGameplayAbilitySpecHandle& Handle : HandlesToRemove)
+				{
+					if (Handle.IsValid()) { continue; }
+					ASC->ClearAbility(Handle);
+				}
+			}
 		}
 
 		WeaponToDestroy->Destroy();
